@@ -29,7 +29,7 @@ export default function Navbar() {
               </span>
             </div>
             <div className="flex flex-col">
-              <span className="text-foreground text-lg leading-tight font-bold">
+              <span className="text-foreground font-serif text-lg leading-tight font-semibold">
                 Doylestown
               </span>
               <span className="text-muted-foreground -mt-0.5 text-xs">

@@ -141,7 +141,7 @@ export default function Gallery() {
               <Star className="text-accent fill-accent h-5 w-5" />
               <span className="text-primary font-medium">Our Work</span>
             </div>
-            <h2 className="text-foreground mb-4 text-3xl font-bold md:text-4xl">
+            <h2 className="text-foreground mb-4 font-serif text-3xl font-semibold md:text-4xl">
               See the Transformation
             </h2>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg">

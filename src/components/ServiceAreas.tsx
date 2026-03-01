@@ -62,7 +62,7 @@ export default function ServiceAreas() {
       <Container>
         <FadeIn>
           <div className="mb-12 text-center">
-            <h2 className="text-foreground mb-4 text-3xl font-bold md:text-4xl">
+            <h2 className="text-foreground mb-4 font-serif text-3xl font-semibold md:text-4xl">
               Do You Serve My Area?
             </h2>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg">

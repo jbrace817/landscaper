@@ -43,7 +43,7 @@ export default function Footer() {
                 <span className="text-primary text-lg font-bold">D</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-lg leading-tight font-bold">
+                <span className="font-serif text-lg leading-tight font-semibold">
                   Doylestown
                 </span>
                 <span className="text-sm text-white/60">Lawn & Landscape</span>
