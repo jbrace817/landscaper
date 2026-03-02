@@ -7,6 +7,8 @@ import Container from "@/components/Container";
 import { FadeIn } from "@/components/FadeIn";
 import L from "leaflet";
 import { Button } from "@/components/ui/Button";
+import { MapPin, CheckCircle, ArrowRight } from "lucide-react";
+import { LeafDecoration, BranchDecoration } from "@/components/decorations";
 
 const serviceAreas: { name: string; position: [number, number] }[] = [
   { name: "Doylestown", position: [40.3101, -75.1293] },
@@ -27,15 +29,15 @@ const createCustomIcon = () =>
   L.divIcon({
     className: "custom-marker",
     html: `<div style="
-      background-color: #2D5A27;
-      width: 24px;
-      height: 24px;
+      background-color: var(--primary, #2D5A27);
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       border: 3px solid white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     "></div>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
   });
 
 export default function ServiceAreas() {
@@ -47,10 +49,13 @@ export default function ServiceAreas() {
 
   if (!isMounted) {
     return (
-      <section id="areas" className="bg-background py-16 md:py-24">
+      <section
+        id="areas"
+        className="from-background to-secondary/20 relative overflow-hidden bg-gradient-to-b py-20 md:py-32"
+      >
         <Container>
           <div className="animate-pulse">
-            <div className="bg-muted h-96 rounded-xl" />
+            <div className="bg-muted h-[500px] rounded-2xl" />
           </div>
         </Container>
       </section>
@@ -58,24 +63,59 @@ export default function ServiceAreas() {
   }
 
   return (
-    <section id="areas" className="bg-background py-16 md:py-24">
-      <Container>
+    <section
+      id="areas"
+      className="from-background to-secondary/20 relative overflow-hidden bg-gradient-to-b py-20 md:py-32"
+    >
+      {/* Decorative elements */}
+      <LeafDecoration className="text-primary absolute top-20 -left-10 h-40 w-40 rotate-[-20deg] opacity-30" />
+      <BranchDecoration className="text-primary absolute -right-20 bottom-32 w-64 opacity-25" />
+
+      <Container className="relative">
         <FadeIn>
-          <div className="mb-12 text-center">
-            <h2 className="text-foreground mb-4 font-serif text-3xl font-semibold md:text-4xl">
-              Do You Serve My Area?
+          <div className="mb-14 text-center md:mb-16">
+            {/* Editorial eyebrow */}
+            <div className="mb-4 flex items-center justify-center gap-3">
+              <div className="bg-primary h-px w-8" />
+              <span className="text-primary text-sm font-medium tracking-[0.2em] uppercase">
+                Service Areas
+              </span>
+              <div className="bg-primary h-px w-8" />
+            </div>
+
+            <h2
+              className="text-foreground mb-5 text-4xl leading-[1.1] font-semibold tracking-tight md:text-5xl lg:text-6xl"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+            >
+              Do You Serve{" "}
+              <span className="relative inline-block">
+                My Area?
+                <svg
+                  className="text-primary/30 absolute -bottom-1 left-0 h-2 w-full"
+                  viewBox="0 0 200 8"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 4Q50 0 100 4T200 4"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    fill="none"
+                  />
+                </svg>
+              </span>
             </h2>
-            <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
+
+            <p className="text-muted-foreground mx-auto max-w-2xl text-lg leading-relaxed md:text-xl">
               We proudly serve Doylestown, PA and the surrounding communities.
               Check if your neighborhood is in our service area.
             </p>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
           {/* Map */}
-          <FadeIn>
-            <div className="border-border h-[400px] overflow-hidden rounded-xl border lg:col-span-2 lg:h-[500px]">
+          <FadeIn className="lg:col-span-8">
+            <div className="border-border/50 relative h-[400px] overflow-hidden rounded-2xl border shadow-xl lg:h-[520px]">
               <MapContainer
                 center={doylestownCenter}
                 zoom={11}
@@ -90,9 +130,10 @@ export default function ServiceAreas() {
                   center={doylestownCenter}
                   radius={20000}
                   pathOptions={{
-                    color: "#2D5A27",
-                    fillColor: "#2D5A27",
-                    fillOpacity: 0.15,
+                    color: "var(--primary, #2D5A27)",
+                    fillColor: "var(--primary, #2D5A27)",
+                    fillOpacity: 0.1,
+                    weight: 2,
                   }}
                 />
                 {serviceAreas.map((area, index) => (
@@ -103,41 +144,71 @@ export default function ServiceAreas() {
                   >
                     <Popup>
                       <div className="text-center">
-                        <strong>{area.name}</strong>
+                        <strong className="text-foreground">{area.name}</strong>
                         <br />
-                        <span className="text-muted-foreground text-sm">
-                          In Service Area
+                        <span className="text-primary text-sm">
+                          ✓ In Service Area
                         </span>
                       </div>
                     </Popup>
                   </Marker>
                 ))}
               </MapContainer>
+
+              {/* Map overlay gradient at bottom */}
+              <div className="from-card/80 pointer-events-none absolute right-0 bottom-0 left-0 h-20 bg-gradient-to-t to-transparent" />
             </div>
           </FadeIn>
 
           {/* Areas List */}
-          <FadeIn>
-            <div className="bg-card border-border h-[400px] overflow-y-auto rounded-xl border p-6 lg:h-[500px]">
-              <h3 className="text-foreground mb-4 font-semibold">
-                Service Areas
-              </h3>
-              <div className="space-y-2">
-                {serviceAreas.map((area, index) => (
-                  <div
-                    key={index}
-                    className="bg-muted/50 hover:bg-muted flex items-center gap-3 rounded-lg p-3 transition-colors"
+          <FadeIn className="lg:col-span-4">
+            <div className="border-border/50 bg-card/60 flex h-full flex-col overflow-hidden rounded-2xl border backdrop-blur-sm">
+              <div className="border-border/50 border-b p-6">
+                <div className="mb-1 flex items-center gap-2">
+                  <MapPin className="text-primary h-5 w-5" />
+                  <h3
+                    className="text-foreground text-lg font-semibold"
+                    style={{
+                      fontFamily: "var(--font-playfair), Georgia, serif",
+                    }}
                   >
-                    <div className="bg-primary h-2 w-2 rounded-full" />
-                    <span className="text-foreground">{area.name}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="border-border mt-6 border-t pt-6">
-                <p className="text-muted-foreground mb-4 text-sm">
-                  Don&apos;t see your area? We may still be able to serve you!
+                    Service Areas
+                  </h3>
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  10+ communities served
                 </p>
-                <Button className="w-full">Check Your Address</Button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-4">
+                <div className="grid grid-cols-2 gap-2 lg:grid-cols-1">
+                  {serviceAreas.map((area, index) => (
+                    <div
+                      key={index}
+                      className="group bg-card hover:bg-primary/5 hover:ring-primary/20 flex items-center gap-3 rounded-xl p-3 ring-1 ring-transparent transition-all"
+                    >
+                      <CheckCircle className="text-primary h-4 w-4 shrink-0" />
+                      <span className="text-foreground text-sm font-medium">
+                        {area.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="border-border/50 border-t p-6">
+                <div className="bg-primary/5 mb-4 rounded-xl p-4">
+                  <p className="text-foreground mb-1 text-sm font-medium">
+                    Don&apos;t see your area?
+                  </p>
+                  <p className="text-muted-foreground text-xs">
+                    We may still be able to serve you. Contact us to check!
+                  </p>
+                </div>
+                <Button className="group w-full">
+                  Check Your Address
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
               </div>
             </div>
           </FadeIn>
