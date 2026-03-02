@@ -88,20 +88,8 @@ export default function ServiceAreas() {
               style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
             >
               Do You Serve{" "}
-              <span className="relative inline-block">
-                My Area?
-                <svg
-                  className="text-primary/30 absolute -bottom-1 left-0 h-2 w-full"
-                  viewBox="0 0 200 8"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 4Q50 0 100 4T200 4"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    fill="none"
-                  />
-                </svg>
+              <span className="text-primary relative inline-block">
+                My Area?{" "}
               </span>
             </h2>
 
@@ -115,7 +103,7 @@ export default function ServiceAreas() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
           {/* Map */}
           <FadeIn className="lg:col-span-8">
-            <div className="border-border/50 relative h-[400px] overflow-hidden rounded-2xl border shadow-xl lg:h-[520px]">
+            <div className="border-border/50 relative h-[400px] overflow-hidden rounded-2xl border shadow-xl lg:h-full">
               <MapContainer
                 center={doylestownCenter}
                 zoom={11}
