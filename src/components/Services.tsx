@@ -13,10 +13,7 @@ import {
 import Container from "@/components/Container";
 import { FadeIn, FadeInStagger } from "@/components/FadeIn";
 import { Button } from "@/components/ui/Button";
-import {
-  LeafDecorationFilled,
-  CornerFlourish,
-} from "@/components/decorations";
+import { LeafDecorationFilled, CornerFlourish } from "@/components/decorations";
 
 const services = [
   {
@@ -72,7 +69,10 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative overflow-hidden bg-background py-20 md:py-32">
+    <section
+      id="services"
+      className="bg-background relative overflow-hidden py-20 md:py-32"
+    >
       {/* Decorative elements */}
       <CornerFlourish className="text-primary absolute -top-4 -left-4 h-32 w-32 opacity-40" />
       <LeafDecorationFilled className="text-primary absolute -right-10 bottom-40 h-48 w-48 rotate-12 opacity-30" />
@@ -83,7 +83,7 @@ export default function Services() {
             {/* Editorial eyebrow */}
             <div className="mb-4 flex items-center gap-3">
               <div className="bg-primary h-px w-12" />
-              <span className="text-primary text-sm font-medium uppercase tracking-[0.2em]">
+              <span className="text-primary text-sm font-medium tracking-[0.2em] uppercase">
                 What We Do
               </span>
             </div>
@@ -96,7 +96,7 @@ export default function Services() {
               <span className="relative inline-block">
                 Landscaping
                 <svg
-                  className="text-accent/50 absolute -bottom-1 left-0 h-2 w-full"
+                  className="text-primary/30 absolute -bottom-1 left-0 h-2 w-full"
                   viewBox="0 0 200 8"
                   preserveAspectRatio="none"
                 >
@@ -123,19 +123,12 @@ export default function Services() {
         <FadeInStagger>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, index) => (
-              <FadeIn
-                key={index}
-                className={`group ${index === 0 ? "md:col-span-2 lg:col-span-1 lg:row-span-2" : ""}`}
-              >
+              <FadeIn key={index} className={`group`}>
                 <div
-                  className={`border-border/60 bg-card relative flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-500 hover:shadow-xl ${
-                    index === 0 ? "lg:min-h-[480px]" : ""
-                  }`}
+                  className={`border-border/60 bg-card relative flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-500 hover:shadow-xl`}
                 >
                   {/* Image with overlay */}
-                  <div
-                    className={`relative overflow-hidden ${index === 0 ? "h-64 lg:h-72" : "h-44"}`}
-                  >
+                  <div className={`relative h-64 overflow-hidden lg:h-72`}>
                     <img
                       src={service.image}
                       alt={service.title}
@@ -153,7 +146,7 @@ export default function Services() {
                     {/* Featured badge */}
                     {service.featured && (
                       <div className="absolute top-4 right-4">
-                        <span className="rounded-full bg-accent/90 px-3 py-1 text-xs font-medium text-accent-foreground backdrop-blur-sm">
+                        <span className="bg-accent/90 text-accent-foreground rounded-full px-3 py-1 text-xs font-medium backdrop-blur-sm">
                           Most Popular
                         </span>
                       </div>
@@ -177,7 +170,7 @@ export default function Services() {
 
                     <Link
                       href="#contact"
-                      className="text-primary group/link inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary/80"
+                      className="text-primary group/link hover:text-primary/80 inline-flex items-center gap-2 text-sm font-medium transition-colors"
                     >
                       <span className="relative">
                         Get a Quote
@@ -196,18 +189,19 @@ export default function Services() {
         </FadeInStagger>
 
         <FadeIn>
-          <div className="mt-16 flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-center">
+          <div className="mt-16 flex flex-col items-center gap-4 text-center">
             <Button size="lg" className="group">
               View All Services
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <span className="text-muted-foreground text-sm">
-              or{" "}
+            <span className="text-muted-foreground text-sm">or</span>
+
+            <span className="text-primary underline-offset-4 hover:underline">
               <Link
                 href="#contact"
                 className="text-primary underline-offset-4 hover:underline"
               >
-                request a custom quote
+                Request a Custom Quote
               </Link>
             </span>
           </div>
