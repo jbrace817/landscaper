@@ -93,20 +93,8 @@ export default function Services() {
               style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
             >
               Comprehensive{" "}
-              <span className="relative inline-block">
+              <span className="text-primary relative inline-block">
                 Landscaping
-                <svg
-                  className="text-primary/30 absolute -bottom-1 left-0 h-2 w-full"
-                  viewBox="0 0 200 8"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 4Q50 0 100 4T200 4"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    fill="none"
-                  />
-                </svg>
               </span>{" "}
               Services
             </h2>
