@@ -58,19 +58,6 @@ export default function Hero() {
               Create the Outdoor
               <span className="relative mt-2 block">
                 <span className="text-accent">Sanctuary</span>
-                <svg
-                  className="text-accent/40 absolute -bottom-2 left-0 h-3 w-[60%]"
-                  viewBox="0 0 200 12"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 8C50 3 100 10 150 5C175 3 200 7 200 7"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    fill="none"
-                    strokeLinecap="round"
-                  />
-                </svg>
               </span>
               <span className="mt-1 block">You Deserve</span>
             </h1>
