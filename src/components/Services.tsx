@@ -8,10 +8,15 @@ import {
   TreeDeciduous,
   Lightbulb,
   Droplets,
+  ArrowRight,
 } from "lucide-react";
 import Container from "@/components/Container";
-import { FadeIn } from "@/components/FadeIn";
+import { FadeIn, FadeInStagger } from "@/components/FadeIn";
 import { Button } from "@/components/ui/Button";
+import {
+  LeafDecorationFilled,
+  CornerFlourish,
+} from "@/components/decorations";
 
 const services = [
   {
@@ -21,6 +26,7 @@ const services = [
       "3D renderings, custom plant selection, and comprehensive master planning for your dream outdoor space.",
     image:
       "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=600&q=80",
+    featured: true,
   },
   {
     icon: Scissors,
@@ -66,75 +72,144 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="bg-background py-16 md:py-24">
-      <Container>
+    <section id="services" className="relative overflow-hidden bg-background py-20 md:py-32">
+      {/* Decorative elements */}
+      <CornerFlourish className="text-primary absolute -top-4 -left-4 h-32 w-32 opacity-40" />
+      <LeafDecorationFilled className="text-primary absolute -right-10 bottom-40 h-48 w-48 rotate-12 opacity-30" />
+
+      <Container className="relative">
         <FadeIn>
-          <div className="mb-12 text-center">
-            <h2 className="text-foreground mb-4 font-serif text-3xl font-semibold md:text-4xl">
-              Our Landscaping Services
+          <div className="mb-16 max-w-2xl md:mb-20">
+            {/* Editorial eyebrow */}
+            <div className="mb-4 flex items-center gap-3">
+              <div className="bg-primary h-px w-12" />
+              <span className="text-primary text-sm font-medium uppercase tracking-[0.2em]">
+                What We Do
+              </span>
+            </div>
+
+            <h2
+              className="text-foreground mb-5 text-4xl leading-[1.1] font-semibold tracking-tight md:text-5xl lg:text-6xl"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+            >
+              Comprehensive{" "}
+              <span className="relative inline-block">
+                Landscaping
+                <svg
+                  className="text-accent/50 absolute -bottom-1 left-0 h-2 w-full"
+                  viewBox="0 0 200 8"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 4Q50 0 100 4T200 4"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    fill="none"
+                  />
+                </svg>
+              </span>{" "}
+              Services
             </h2>
-            <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-              From design to maintenance, we offer comprehensive landscaping
-              solutions tailored to your Doylestown property.
+
+            <p className="text-muted-foreground text-lg leading-relaxed md:text-xl">
+              From design to maintenance, we offer tailored solutions for your
+              Doylestown property. Each service reflects our commitment to
+              quality and attention to detail.
             </p>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <FadeIn key={index}>
-              <div className="group bg-card border-border hover:border-primary/30 overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-lg">
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 flex items-center gap-3">
-                    <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-lg">
-                      <service.icon className="text-primary-foreground h-5 w-5" />
+        {/* Services Grid - Asymmetric Masonry Style */}
+        <FadeInStagger>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, index) => (
+              <FadeIn
+                key={index}
+                className={`group ${index === 0 ? "md:col-span-2 lg:col-span-1 lg:row-span-2" : ""}`}
+              >
+                <div
+                  className={`border-border/60 bg-card relative flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-500 hover:shadow-xl ${
+                    index === 0 ? "lg:min-h-[480px]" : ""
+                  }`}
+                >
+                  {/* Image with overlay */}
+                  <div
+                    className={`relative overflow-hidden ${index === 0 ? "h-64 lg:h-72" : "h-44"}`}
+                  >
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                    {/* Icon badge */}
+                    <div className="absolute bottom-4 left-4 flex items-center gap-3">
+                      <div className="bg-primary ring-primary/30 flex h-12 w-12 items-center justify-center rounded-xl ring-2 transition-transform duration-300 group-hover:scale-105">
+                        <service.icon className="text-primary-foreground h-6 w-6" />
+                      </div>
                     </div>
-                    <h3 className="font-semibold text-white">
+
+                    {/* Featured badge */}
+                    {service.featured && (
+                      <div className="absolute top-4 right-4">
+                        <span className="rounded-full bg-accent/90 px-3 py-1 text-xs font-medium text-accent-foreground backdrop-blur-sm">
+                          Most Popular
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3
+                      className="text-foreground mb-2 text-xl font-semibold md:text-2xl"
+                      style={{
+                        fontFamily: "var(--font-playfair), Georgia, serif",
+                      }}
+                    >
                       {service.title}
                     </h3>
-                  </div>
-                </div>
 
-                {/* Content */}
-                <div className="p-6">
-                  <p className="text-muted-foreground mb-4">
-                    {service.description}
-                  </p>
-                  <Link
-                    href="#contact"
-                    className="text-primary inline-flex items-center font-medium hover:underline"
-                  >
-                    Learn more
-                    <svg
-                      className="ml-1 h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                    <p className="text-muted-foreground mb-5 flex-1 text-sm leading-relaxed md:text-base">
+                      {service.description}
+                    </p>
+
+                    <Link
+                      href="#contact"
+                      className="text-primary group/link inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary/80"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </Link>
+                      <span className="relative">
+                        Get a Quote
+                        <span className="bg-primary/30 absolute -bottom-0.5 left-0 h-px w-0 transition-all duration-300 group-hover/link:w-full" />
+                      </span>
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1" />
+                    </Link>
+                  </div>
+
+                  {/* Decorative corner accent */}
+                  <div className="from-primary/5 pointer-events-none absolute right-0 bottom-0 h-32 w-32 translate-x-8 translate-y-8 rounded-full bg-gradient-to-tl to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+              </FadeIn>
+            ))}
+          </div>
+        </FadeInStagger>
 
         <FadeIn>
-          <div className="mt-12 text-center">
-            <Button size="lg">View All Services</Button>
+          <div className="mt-16 flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-center">
+            <Button size="lg" className="group">
+              View All Services
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <span className="text-muted-foreground text-sm">
+              or{" "}
+              <Link
+                href="#contact"
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                request a custom quote
+              </Link>
+            </span>
           </div>
         </FadeIn>
       </Container>
