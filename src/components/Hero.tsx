@@ -14,7 +14,7 @@ const trustIndicators = [
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[90vh] items-center pt-20">
+    <section className="relative flex min-h-[90vh] pt-20">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -26,9 +26,9 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/25" />
       </div>
 
-      <Container className="relative z-10 py-16 md:py-24">
+      <div className="relative z-10 w-full py-16 md:py-24">
         <FadeIn>
-          <div className="max-w-3xl">
+          <Container>
             {/* Trust Badges */}
             <div className="mb-8 flex flex-wrap gap-3">
               {trustIndicators.map((indicator) => (
@@ -81,9 +81,9 @@ export default function Hero() {
                 <Link href="#gallery">View Our Work</Link>
               </Button>
             </div>
-          </div>
+          </Container>
         </FadeIn>
-      </Container>
+      </div>
 
       {/* Bottom Wave Decoration */}
       <div className="absolute right-0 bottom-0 left-0">
