@@ -3,6 +3,7 @@
 import { Shield, Clock, Award, Leaf } from "lucide-react";
 import Container from "@/components/Container";
 import { FadeIn, FadeInStagger } from "@/components/FadeIn";
+import { LeafDecoration, BranchDecoration } from "@/components/decorations";
 
 const trustBadges = [
   {
@@ -30,66 +31,6 @@ const trustBadges = [
     accent: "chart-4",
   },
 ];
-
-// Organic leaf decoration SVG
-function LeafDecoration({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 120 120"
-      fill="none"
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M60 10C60 10 20 40 20 70C20 90 38 110 60 110C82 110 100 90 100 70C100 40 60 10 60 10Z"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-        opacity="0.3"
-      />
-      <path
-        d="M60 25C60 25 35 50 35 72C35 85 46 98 60 98C74 98 85 85 85 72C85 50 60 25 60 25Z"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-        opacity="0.2"
-      />
-      <line
-        x1="60"
-        y1="30"
-        x2="60"
-        y2="100"
-        stroke="currentColor"
-        strokeWidth="1"
-        opacity="0.15"
-      />
-    </svg>
-  );
-}
-
-// Branch decoration
-function BranchDecoration({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 200 60"
-      fill="none"
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M0 30C30 30 50 15 80 15C110 15 130 45 160 45C180 45 200 30 200 30"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.2"
-      />
-      <circle cx="40" cy="22" r="4" fill="currentColor" opacity="0.15" />
-      <circle cx="80" cy="15" r="3" fill="currentColor" opacity="0.1" />
-      <circle cx="120" cy="35" r="5" fill="currentColor" opacity="0.12" />
-      <circle cx="160" cy="45" r="3" fill="currentColor" opacity="0.1" />
-    </svg>
-  );
-}
 
 export default function TrustBadges() {
   return (
@@ -126,23 +67,7 @@ export default function TrustBadges() {
               style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
             >
               Why Doylestown Homeowners{" "}
-              <span className="relative">
-                Trust
-                <svg
-                  className="text-primary/30 absolute -bottom-2 left-0 h-3 w-full"
-                  viewBox="0 0 200 12"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0 8C50 3 100 10 150 5C175 3 200 7 200 7"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    fill="none"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>{" "}
-              Us
+              <span className="text-primary relative">Trust</span> Us
             </h2>
 
             <p className="text-muted-foreground max-w-xl text-lg leading-relaxed md:text-xl">
