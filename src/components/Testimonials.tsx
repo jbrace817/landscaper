@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 import Container from "@/components/Container";
 import { FadeIn } from "@/components/FadeIn";
+import {
+  LeafDecoration,
+  BranchDecorationVertical,
+} from "@/components/decorations";
 
 const testimonials = [
   {
@@ -50,39 +54,85 @@ const testimonials = [
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const next = () => {
+  const next = useCallback(() => {
+    if (isAnimating) return;
+    setIsAnimating(true);
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
+  }, [isAnimating]);
 
-  const prev = () => {
+  const prev = useCallback(() => {
+    if (isAnimating) return;
+    setIsAnimating(true);
     setCurrentIndex(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
-  };
+  }, [isAnimating]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsAnimating(false), 400);
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
+
+  // Auto-advance
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section id="testimonials" className="bg-background-warm py-16 md:py-24">
-      <Container>
+    <section
+      id="testimonials"
+      className="from-secondary/20 via-background to-accent/10 relative overflow-hidden bg-gradient-to-br py-20 md:py-32"
+    >
+      {/* Decorative elements */}
+      <LeafDecoration className="text-primary absolute -top-10 -left-10 h-48 w-48 rotate-[-25deg] opacity-30" />
+      <BranchDecorationVertical className="text-primary absolute top-20 right-10 h-48 opacity-25" />
+      <LeafDecoration className="text-primary absolute -right-16 bottom-20 h-40 w-40 rotate-[35deg] opacity-25" />
+
+      {/* Subtle texture */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      <Container className="relative">
         <FadeIn>
-          <div className="mb-12 text-center">
-            <h2 className="text-foreground mb-4 font-serif text-3xl font-semibold md:text-4xl">
-              What Doylestown Homeowners Say
+          <div className="mb-14 text-center md:mb-16">
+            {/* Editorial eyebrow */}
+            <div className="mb-4 flex items-center justify-center gap-3">
+              <div className="bg-primary h-px w-8" />
+              <span className="text-primary text-sm font-medium tracking-[0.2em] uppercase">
+                Testimonials
+              </span>
+              <div className="bg-primary h-px w-8" />
+            </div>
+
+            <h2
+              className="text-foreground mb-5 text-4xl leading-[1.1] font-semibold tracking-tight md:text-5xl lg:text-6xl"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+            >
+              What Our{" "}
+              <span className="text-primary relative inline-block">
+                Clients
+              </span>{" "}
+              Say
             </h2>
-            <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-              Don&apos;t just take our word for it. Here&apos;s what our clients
-              have to say about their experience with us.
-            </p>
           </div>
         </FadeIn>
 
         {/* Testimonial Carousel */}
         <FadeIn>
-          <div className="relative mx-auto max-w-4xl">
+          <div className="relative mx-auto max-w-5xl">
             {/* Navigation Buttons */}
             <button
               onClick={prev}
-              className="bg-card border-border hover:border-primary hover:bg-primary/5 absolute top-1/2 left-0 z-10 flex h-12 w-12 -translate-x-4 -translate-y-1/2 items-center justify-center rounded-full border transition-colors md:-translate-x-12"
+              className="border-border bg-card/80 hover:border-primary hover:bg-primary/5 absolute top-1/2 left-0 z-10 flex h-12 w-12 -translate-x-2 -translate-y-1/2 items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 md:-translate-x-6"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="text-foreground h-5 w-5" />
@@ -90,59 +140,104 @@ export default function Testimonials() {
 
             <button
               onClick={next}
-              className="bg-card border-border hover:border-primary hover:bg-primary/5 absolute top-1/2 right-0 z-10 flex h-12 w-12 translate-x-4 -translate-y-1/2 items-center justify-center rounded-full border transition-colors md:translate-x-12"
+              className="border-border bg-card/80 hover:border-primary hover:bg-primary/5 absolute top-1/2 right-0 z-10 flex h-12 w-12 translate-x-2 -translate-y-1/2 items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 md:translate-x-6"
               aria-label="Next testimonial"
             >
               <ChevronRight className="text-foreground h-5 w-5" />
             </button>
 
             {/* Testimonial Card */}
-            <div className="bg-card border-border rounded-2xl border p-8 md:p-12">
-              <Quote className="text-primary/20 mb-6 h-12 w-12" />
+            <div className="border-border/50 bg-card/60 relative overflow-hidden rounded-3xl border p-8 shadow-xl backdrop-blur-sm md:p-12 lg:p-16">
+              {/* Large quote mark background */}
+              <Quote className="text-primary/[0.05] absolute -top-4 -left-4 h-40 w-40" />
+              <Quote className="text-primary/[0.03] absolute -right-8 -bottom-8 h-56 w-56 rotate-180" />
 
-              <div className="mb-6 flex gap-1">
-                {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} className="text-accent fill-accent h-5 w-5" />
-                ))}
-              </div>
+              <div className="relative z-10">
+                {/* Stars */}
+                <div className="mb-6 flex justify-center gap-1.5">
+                  {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="h-6 w-6 fill-amber-400 text-amber-400"
+                    />
+                  ))}
+                </div>
 
-              <blockquote className="text-foreground mb-8 text-lg leading-relaxed md:text-xl">
-                &ldquo;{testimonials[currentIndex].quote}&rdquo;
-              </blockquote>
+                {/* Quote */}
+                <blockquote
+                  className={`text-foreground mx-auto mb-10 max-w-3xl text-center text-xl leading-relaxed transition-opacity duration-300 md:text-2xl lg:text-3xl ${isAnimating ? "opacity-0" : "opacity-100"}`}
+                  style={{
+                    fontFamily: "var(--font-playfair), Georgia, serif",
+                  }}
+                >
+                  &ldquo;{testimonials[currentIndex].quote}&rdquo;
+                </blockquote>
 
-              <div className="flex items-center gap-4">
-                <img
-                  src={testimonials[currentIndex].image}
-                  alt={testimonials[currentIndex].name}
-                  className="border-primary/20 h-14 w-14 rounded-full border-2 object-cover"
-                />
-                <div>
-                  <div className="text-foreground font-semibold">
-                    {testimonials[currentIndex].name}
+                {/* Author */}
+                <div
+                  className={`flex flex-col items-center gap-4 transition-opacity duration-300 ${isAnimating ? "opacity-0" : "opacity-100"}`}
+                >
+                  <div className="ring-primary/30 h-16 w-16 overflow-hidden rounded-full ring-4">
+                    <img
+                      src={testimonials[currentIndex].image}
+                      alt={testimonials[currentIndex].name}
+                      className="h-full w-full object-cover"
+                    />
                   </div>
-                  <div className="text-muted-foreground text-sm">
-                    {testimonials[currentIndex].neighborhood} •{" "}
-                    {testimonials[currentIndex].service}
+                  <div className="text-center">
+                    <div
+                      className="text-foreground text-lg font-semibold"
+                      style={{
+                        fontFamily: "var(--font-playfair), Georgia, serif",
+                      }}
+                    >
+                      {testimonials[currentIndex].name}
+                    </div>
+                    <div className="text-muted-foreground text-sm">
+                      {testimonials[currentIndex].neighborhood} •{" "}
+                      <span className="text-primary">
+                        {testimonials[currentIndex].service}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Dots Indicator */}
-            <div className="mt-6 flex justify-center gap-2">
+            {/* Pagination Dots */}
+            <div className="mt-8 flex justify-center gap-3">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`h-2 w-2 rounded-full transition-colors ${
+                  className={`h-2 rounded-full transition-all duration-300 ${
                     index === currentIndex
-                      ? "bg-primary w-6"
-                      : "bg-muted-foreground/30"
+                      ? "bg-primary w-8"
+                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50 w-2"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}
             </div>
+          </div>
+        </FadeIn>
+
+        {/* Trust indicators */}
+        <FadeIn>
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-8 md:gap-12">
+            {[
+              { icon: "⭐", text: "4.9/5 Average Rating" },
+              { icon: "🏆", text: "Best of Doylestown 2024" },
+              { icon: "✅", text: "100+ Google Reviews" },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="text-muted-foreground flex items-center gap-2 text-sm"
+              >
+                <span className="text-lg">{item.icon}</span>
+                <span>{item.text}</span>
+              </div>
+            ))}
           </div>
         </FadeIn>
       </Container>
