@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${playfair.variable} ${sourceSans.variable} antialiased`}
       >
         {children}
+        <TailwindIndicator />
       </body>
     </html>
   );
