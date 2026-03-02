@@ -142,7 +142,6 @@ export default function TrustBadges() {
                   />
                 </svg>
               </span>{" "}
-              <br className="hidden sm:block" />
               Us
             </h2>
 
