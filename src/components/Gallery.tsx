@@ -5,11 +5,12 @@ import Container from "@/components/Container";
 import { FadeIn, FadeInStagger } from "@/components/FadeIn";
 import { MapPin, ArrowLeftRight } from "lucide-react";
 import { BranchDecoration, LeafCluster } from "@/components/decorations";
+import { ImageComparisonCustomSlider } from "@/components/ImageSlider/ImageComparisonSlider";
 
 const projects = [
   {
     before:
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=60",
+      "https://images.unsplash.com/photo-1608653206809-e6a8044173b0?w=800&q=80",
     after:
       "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
     title: "Complete Backyard Transformation",
@@ -18,144 +19,50 @@ const projects = [
   },
   {
     before:
-      "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=800&q=60",
+      "https://images.unsplash.com/photo-1608653206809-e6a8044173b0?w=800&q=80",
     after:
-      "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=800&q=80",
+      "https://images.unsplash.com/photo-1609757754057-8a8e17eb73b2?w=800&q=80",
     title: "Front Yard Upgrade",
     neighborhood: "Warrington",
     service: "Hardscaping & Planting",
   },
   {
     before:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=60",
+      "https://images.unsplash.com/photo-1608653206809-e6a8044173b0?w=800&q=80",
     after:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+      "https://images.unsplash.com/photo-1611282712338-63a58e27980a?w=800&q=80",
     title: "Patio & Outdoor Living",
     neighborhood: "Warminster",
     service: "Hardscaping",
   },
   {
     before:
-      "https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?w=800&q=60",
+      "https://images.unsplash.com/photo-1608653206809-e6a8044173b0?w=800&q=80",
     after:
-      "https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?w=800&q=80",
+      "https://images.unsplash.com/photo-1623358519330-00f61d89396b?w=800&q=80",
     title: "Mature Garden Installation",
     neighborhood: "Hatfield",
     service: "Planting & Design",
   },
   {
     before:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=60",
+      "https://images.unsplash.com/photo-1608653206809-e6a8044173b0?w=800&q=80",
     after:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+      "https://images.unsplash.com/photo-1658692051708-519fbdac7e8f?w=800&q=80",
     title: "Lighting Transformation",
     neighborhood: "Buckingham",
     service: "Outdoor Lighting",
   },
   {
     before:
-      "https://images.unsplash.com/photo-1579622586746-11c53d4c5c1a?w=800&q=60",
+      "https://images.unsplash.com/photo-1608653206809-e6a8044173b0?w=800&q=80",
     after:
-      "https://images.unsplash.com/photo-1579622586746-11c53d4c5c1a?w=800&q=80",
+      "https://images.unsplash.com/photo-1743938953444-0c00eb235b2e?w=800&q=80",
     title: "Irrigation System Install",
     neighborhood: "New Britain",
     service: "Irrigation",
   },
 ];
-
-function BeforeAfterSlider({
-  before,
-  after,
-}: {
-  before: string;
-  after: string;
-}) {
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const handleMove = (clientX: number) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-    setSliderPosition((x / rect.width) * 100);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    handleMove(e.clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (e.touches.length > 0) {
-      handleMove(e.touches[0].clientX);
-    }
-  };
-
-  return (
-    <div
-      ref={containerRef}
-      className="group/slider relative aspect-[4/3] cursor-ew-resize overflow-hidden rounded-2xl select-none"
-      onMouseMove={handleMouseMove}
-      onTouchMove={handleTouchMove}
-      onMouseDown={() => setIsDragging(true)}
-      onMouseUp={() => setIsDragging(false)}
-      onMouseLeave={() => setIsDragging(false)}
-    >
-      {/* Before Image */}
-      <img
-        src={before}
-        alt="Before"
-        className="absolute inset-0 h-full w-full object-cover"
-        draggable={false}
-      />
-
-      {/* After Image (clipped) */}
-      <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ width: `${sliderPosition}%` }}
-      >
-        <img
-          src={after}
-          alt="After"
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{
-            width: containerRef.current
-              ? `${containerRef.current.offsetWidth}px`
-              : "100%",
-          }}
-          draggable={false}
-        />
-      </div>
-
-      {/* Labels */}
-      <div className="pointer-events-none absolute top-3 left-3 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-        Before
-      </div>
-      <div className="bg-primary text-primary-foreground pointer-events-none absolute top-3 right-3 rounded-full px-3 py-1 text-xs font-medium backdrop-blur-sm">
-        After
-      </div>
-
-      {/* Slider Handle */}
-      <div
-        className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg"
-        style={{ left: `${sliderPosition}%` }}
-      >
-        <div
-          className={`absolute top-1/2 left-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-xl transition-transform ${isDragging ? "scale-110" : "group-hover/slider:scale-105"}`}
-        >
-          <ArrowLeftRight className="text-foreground h-4 w-4" />
-        </div>
-      </div>
-
-      {/* Drag hint overlay - shows briefly */}
-      <div className="bg-foreground/60 pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover/slider:opacity-0">
-        <span className="rounded-full bg-white/90 px-4 py-2 text-sm font-medium">
-          Drag to compare
-        </span>
-      </div>
-    </div>
-  );
-}
 
 export default function Gallery() {
   return (
@@ -209,9 +116,9 @@ export default function Gallery() {
             {projects.map((project, index) => (
               <FadeIn key={index} className="group">
                 <div className="border-border/50 bg-card/50 overflow-hidden rounded-2xl border backdrop-blur-sm transition-all duration-500 hover:shadow-xl">
-                  <BeforeAfterSlider
-                    before={project.before}
-                    after={project.after}
+                  <ImageComparisonCustomSlider
+                    imageBefore={project.before}
+                    imageAfter={project.after}
                   />
 
                   <div className="p-5">
