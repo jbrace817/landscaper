@@ -10,6 +10,7 @@ import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import StatsRow from "@/components/StatsRow";
 
 const ServiceAreasWrapper = dynamic(
   () => import("@/components/ServiceAreasWrapper"),
@@ -25,6 +26,7 @@ export default function Home() {
         <TrustBadges />
         <Services />
         <Gallery />
+        <StatsRow />
         <ServiceAreasWrapper />
         <Testimonials />
         <FAQ />
