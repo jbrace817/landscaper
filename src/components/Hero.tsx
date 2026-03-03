@@ -7,15 +7,11 @@ import Container from "@/components/Container";
 import { FadeIn } from "@/components/FadeIn";
 import { LeafDecoration } from "@/components/decorations";
 
-const trustIndicators = [
-  "Licensed & Insured",
-  "20+ Years Experience",
-  "500+ Happy Clients",
-];
+const trustIndicators = ["Licensed & Insured"];
 
 export default function Hero() {
   return (
-    <section className="relative mx-auto flex min-h-[95vh] pt-20">
+    <section className="relative mx-auto flex min-h-[95vh] pt-12">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -34,7 +30,7 @@ export default function Hero() {
 
       <Container className="relative z-10 flex w-full items-center py-16 md:py-24">
         <FadeIn>
-          <div className="max-w-3xl xl:pb-20">
+          <div className="max-w-4xl xl:pb-20">
             {/* Trust Badges - Pill style */}
             <div className="mb-8 flex flex-wrap gap-3">
               {trustIndicators.map((indicator) => (
