@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 import Container from "@/components/Container";
 import { FadeIn } from "@/components/FadeIn";
@@ -17,7 +17,7 @@ const testimonials = [
     image:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&q=80",
     quote:
-      "Our backyard was completely transformed! The team was professional, knowledgeable, and delivered exactly what we envisioned. We've already recommended them to our neighbors.",
+      "Our backyard was completely transformed! The team was professional, knowledgeable, and delivered exactly what we envisioned.",
     rating: 5,
   },
   {
@@ -55,6 +55,7 @@ const testimonials = [
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const next = useCallback(() => {
     if (isAnimating) return;
@@ -75,13 +76,23 @@ export default function Testimonials() {
     return () => clearTimeout(timer);
   }, [currentIndex]);
 
-  // Auto-advance
-  useEffect(() => {
-    const interval = setInterval(() => {
+  const advanceToNext = useCallback(() => {
+    setIsAnimating(true);
+    if (advanceTimeoutRef.current) clearTimeout(advanceTimeoutRef.current);
+    advanceTimeoutRef.current = setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 8000);
-    return () => clearInterval(interval);
+      advanceTimeoutRef.current = null;
+    }, 300); // Match transition duration so fade-out completes before content swap
   }, []);
+
+  // Auto-advance (trigger animation same as manual next)
+  useEffect(() => {
+    const interval = setInterval(advanceToNext, 8000);
+    return () => {
+      clearInterval(interval);
+      if (advanceTimeoutRef.current) clearTimeout(advanceTimeoutRef.current);
+    };
+  }, [advanceToNext]);
 
   return (
     <section
