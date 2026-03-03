@@ -138,16 +138,13 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="border-border mt-4 flex flex-col gap-3 border-t pt-4">
-                <a
-                  href="tel:+1234567890"
-                  className="text-foreground flex items-center gap-2 px-4 text-sm font-medium"
-                >
-                  <Phone className="h-4 w-4" />
-                  (123) 456-7890
-                </a>
-                <div className="px-4">
-                  <Button className="w-full">Get Free Quote</Button>
-                </div>
+                <Button asChild className="bg-foreground text-background">
+                  <a href="tel:+1234567890">
+                    <Phone className="h-4 w-4" />
+                    (123) 456-7890
+                  </a>
+                </Button>
+                <Button className="w-full">Get Free Quote</Button>
               </div>
             </div>
           </div>
