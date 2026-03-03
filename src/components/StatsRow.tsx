@@ -52,6 +52,9 @@ function StatsRow() {
                     <NumberFlow
                       value={displayedValues[index]}
                       suffix={stat.suffix}
+                      style={{
+                        lineHeight: 1.1,
+                      }}
                     />
                   </div>
                   <div className="text-muted-foreground text-sm">
