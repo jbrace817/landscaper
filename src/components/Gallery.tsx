@@ -147,34 +147,6 @@ export default function Gallery() {
             ))}
           </div>
         </FadeInStagger>
-
-        {/* Stats row */}
-        <FadeIn>
-          <div className="border-border/50 bg-card/30 mt-16 rounded-2xl border p-8 backdrop-blur-sm">
-            <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-              {[
-                { value: "500+", label: "Projects Completed" },
-                { value: "20+", label: "Years Experience" },
-                { value: "98%", label: "Client Satisfaction" },
-                { value: "50+", label: "5-Star Reviews" },
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div
-                    className="text-primary mb-1 text-3xl font-semibold md:text-4xl"
-                    style={{
-                      fontFamily: "var(--font-playfair), Georgia, serif",
-                    }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div className="text-muted-foreground text-sm">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </FadeIn>
       </Container>
     </section>
   );
