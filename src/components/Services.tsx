@@ -31,7 +31,7 @@ const services = [
     description:
       "Professional mowing, trimming, fertilization, aeration, and seasonal cleanup services.",
     image:
-      "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=600&q=80",
+      "https://images.unsplash.com/photo-1501520158826-76df880863a3?w=600&q=80",
   },
   {
     icon: LayoutGrid,
@@ -39,7 +39,7 @@ const services = [
     description:
       "Beautiful patios, walkways, retaining walls, fire pits, and outdoor living features.",
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+      "https://images.unsplash.com/photo-1761637822987-282e320d7ee9?w=600&q=80",
   },
   {
     icon: TreeDeciduous,
@@ -47,7 +47,7 @@ const services = [
     description:
       "Expert trimming, pruning, removal, and planting services for healthy greenery.",
     image:
-      "https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?w=600&q=80",
+      "https://images.unsplash.com/photo-1754321871548-61bdbc6f1506?w=600&q=80",
   },
   {
     icon: Lightbulb,
@@ -55,7 +55,7 @@ const services = [
     description:
       "LED path lights, uplighting, and security lighting to enhance your landscape at night.",
     image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
+      "https://images.unsplash.com/photo-1658692051708-519fbdac7e8f?w=600&q=80",
   },
   {
     icon: Droplets,
@@ -63,7 +63,7 @@ const services = [
     description:
       "Professional installation, repairs, and winterization for efficient water management.",
     image:
-      "https://images.unsplash.com/photo-1579622586746-11c53d4c5c1a?w=600&q=80",
+      "https://images.unsplash.com/photo-1743938953444-0c00eb235b2e?w=600&q=80",
   },
 ];
 
