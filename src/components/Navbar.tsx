@@ -110,8 +110,9 @@ export default function Navbar() {
                 useSolidNav ? "" : "text-primary bg-white hover:bg-white/90",
                 "cursor-pointer",
               )}
+              asChild
             >
-              Get Free Quote
+              <Link href="/contact">Get Free Quote</Link>
             </Button>
           </div>
 
