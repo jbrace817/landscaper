@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X, Phone, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Container from "@/components/Container";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "#services", label: "Services" },
@@ -105,9 +106,10 @@ export default function Navbar() {
             </a>
             <Button
               size="sm"
-              className={
-                useSolidNav ? "" : "text-primary bg-white hover:bg-white/90"
-              }
+              className={cn(
+                useSolidNav ? "" : "text-primary bg-white hover:bg-white/90",
+                "cursor-pointer",
+              )}
             >
               Get Free Quote
             </Button>
