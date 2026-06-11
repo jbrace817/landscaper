@@ -60,6 +60,19 @@
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+
+  /* Nudgett Theme */
+  --nudgett-primary: var(--primary);
+  --nudgett-bg: var(--background);
+  --nudgett-text: var(--foreground);
+  --nudgett-border: var(--border);
+  --nudgett-input: var(--input);
+  --nudgett-ring: var(--ring);
+  --nudgett-secondary: var(--secondary);
+  --nudgett-secondary-foreground: var(--secondary-foreground);
+  --nudgett-muted: var(--muted);
+  --nudgett-input-bg: var(--background);
+  --nudgett-placeholder: var(--foreground);
 }
 
 .dark {

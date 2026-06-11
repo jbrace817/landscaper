@@ -104,16 +104,17 @@ export default function Navbar() {
               <Phone className="h-4 w-4" />
               (123) 456-7890
             </a>
-            <Button
-              size="sm"
-              className={cn(
-                useSolidNav ? "" : "text-primary bg-white hover:bg-white/90",
-                "cursor-pointer",
-              )}
-              asChild
-            >
-              <Link href="/contact">Get Free Quote</Link>
-            </Button>
+            <Link href="/contact">
+              <Button
+                size="sm"
+                className={cn(
+                  useSolidNav ? "" : "text-primary bg-white hover:bg-white/90",
+                  "cursor-pointer",
+                )}
+              >
+                Get Free Quote
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -147,7 +148,9 @@ export default function Navbar() {
                     (123) 456-7890
                   </a>
                 </Button>
-                <Button className="w-full">Get Free Quote</Button>
+                <Link href="/contact" onClick={() => setIsOpen(false)}>
+                  <Button className="w-full">Get Free Quote</Button>
+                </Link>
               </div>
             </div>
           </div>

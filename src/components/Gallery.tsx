@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
 import Container from "@/components/Container";
 import { FadeIn, FadeInStagger } from "@/components/FadeIn";
-import { MapPin, ArrowLeftRight } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { BranchDecoration, LeafCluster } from "@/components/decorations";
 import { ImageComparisonCustomSlider } from "@/components/ImageSlider/ImageComparisonSlider";
 

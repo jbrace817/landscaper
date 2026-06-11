@@ -5,6 +5,8 @@ import { ArrowRight, LoaderIcon, Mail, Phone } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
+import Script from "next/script";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
 
@@ -25,7 +27,9 @@ const contactFormSchema = z.object({
     .string()
     .min(1, "Email is required")
     .email("Please enter a valid email"),
+  phone: z.string().min(1, "Phone is required"),
   message: z.string().min(1, "Message is required"),
+  subscribe: z.boolean(),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -62,7 +66,9 @@ const Contact32 = ({
       firstName: "",
       lastName: "",
       email: "",
+      phone: "",
       message: "",
+      subscribe: false,
     },
   });
 
@@ -91,7 +97,8 @@ const Contact32 = ({
       <div className="grid min-h-screen lg:grid-cols-2">
         {/* Image Side */}
         <div className="relative hidden lg:block">
-          <img
+          <Image
+            fill
             src={image}
             alt=""
             className="absolute inset-0 size-full object-cover"
@@ -140,12 +147,15 @@ const Contact32 = ({
                 )}
               >
                 <p className="text-sm font-medium text-green-600 dark:text-green-400">
-                  Message sent! We'll be in touch soon.
+                  Message sent! We&apos;ll be in touch soon.
                 </p>
               </div>
             )}
 
-            <form onSubmit={form.handleSubmit(handleFormSubmit)}>
+            <form
+              id="contact-form"
+              onSubmit={form.handleSubmit(handleFormSubmit)}
+            >
               <FieldGroup>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Controller
@@ -215,6 +225,28 @@ const Contact32 = ({
 
                 <Controller
                   control={form.control}
+                  name="phone"
+                  render={({ field, fieldState }) => (
+                    <Field data-invalid={fieldState.invalid}>
+                      <FieldLabel htmlFor={field.name}>
+                        Phone <span className="text-destructive">*</span>
+                      </FieldLabel>
+                      <Input
+                        {...field}
+                        id={field.name}
+                        type="tel"
+                        aria-invalid={fieldState.invalid}
+                        placeholder="123-456-7890"
+                      />
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
+                    </Field>
+                  )}
+                />
+
+                <Controller
+                  control={form.control}
                   name="message"
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
@@ -231,6 +263,35 @@ const Contact32 = ({
                       {fieldState.invalid && (
                         <FieldError errors={[fieldState.error]} />
                       )}
+                    </Field>
+                  )}
+                />
+
+                <Controller
+                  control={form.control}
+                  name="subscribe"
+                  render={({ field }) => (
+                    <Field orientation="horizontal">
+                      <input
+                        type="checkbox"
+                        id={field.name}
+                        name={field.name}
+                        ref={field.ref}
+                        checked={field.value}
+                        onBlur={field.onBlur}
+                        onChange={(e) => field.onChange(e.target.checked)}
+                        className={cn(
+                          "border-input bg-background accent-primary size-4 shrink-0 rounded border",
+                          "focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none",
+                          "disabled:cursor-not-allowed disabled:opacity-50",
+                        )}
+                      />
+                      <FieldLabel
+                        htmlFor={field.name}
+                        className="cursor-pointer font-normal"
+                      >
+                        Subscribe to marketing
+                      </FieldLabel>
                     </Field>
                   )}
                 />
@@ -260,6 +321,12 @@ const Contact32 = ({
                 </Button>
               </FieldGroup>
             </form>
+            <Script
+              src="https://pseudoprosperous-giovanni-spasmodic.ngrok-free.dev/capture.js"
+              data-embed-key="T6H7rMp1qQ1J"
+              data-form-selector="#contact-form"
+              strategy="afterInteractive"
+            />
           </div>
         </div>
       </div>

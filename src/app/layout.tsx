@@ -36,12 +36,12 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
-        <div id="nudgett-form"></div>
+        <div id="nudgett-popup"></div>
         <Script
-          src="http://192.168.1.167:3000/widget.js"
+          src="https://pseudoprosperous-giovanni-spasmodic.ngrok-free.dev/widget.js"
           data-widget-id="LSGR4mkTzK_y"
           data-mode="popup"
-          data-container="nudgett-form"
+          data-container="nudgett-popup"
           strategy="lazyOnload"
         />
         <Footer />

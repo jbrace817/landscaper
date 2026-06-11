@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import Container from "@/components/Container";
 import { FadeIn } from "@/components/FadeIn";
 import { LeafDecoration } from "@/components/decorations";
+import Image from "next/image";
 
 const trustIndicators = ["Licensed & Insured"];
 
@@ -14,10 +15,11 @@ export default function Hero() {
     <section className="relative mx-auto flex min-h-[95vh] pt-12">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1920&q=80"
           alt="Beautiful landscaped garden"
           className="h-full w-full object-cover"
+          fill
         />
         {/* Rich overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
@@ -97,7 +99,7 @@ export default function Hero() {
                     key={i}
                     className="from-primary/30 to-accent/30 h-10 w-10 overflow-hidden rounded-full border-2 border-white/20 bg-gradient-to-br"
                   >
-                    <img
+                    <Image
                       src={`https://images.unsplash.com/photo-${
                         [
                           "1494790108377-be9c29b29330",
@@ -108,6 +110,8 @@ export default function Hero() {
                       }?w=80&h=80&fit=crop`}
                       alt=""
                       className="h-full w-full object-cover"
+                      width={40}
+                      height={40}
                     />
                   </div>
                 ))}

@@ -8,6 +8,7 @@ import {
   LeafDecoration,
   BranchDecorationVertical,
 } from "@/components/decorations";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -189,10 +190,11 @@ export default function Testimonials() {
                   className={`flex flex-col items-center gap-4 transition-opacity duration-300 ${isAnimating ? "opacity-0" : "opacity-100"}`}
                 >
                   <div className="ring-primary/30 h-16 w-16 overflow-hidden rounded-full ring-4">
-                    <img
+                    <Image
                       src={testimonials[currentIndex].image}
                       alt={testimonials[currentIndex].name}
                       className="h-full w-full object-cover"
+                      fill
                     />
                   </div>
                   <div className="text-center">
