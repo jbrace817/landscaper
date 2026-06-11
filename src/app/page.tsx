@@ -35,8 +35,7 @@ export default function Home() {
             src="https://pseudoprosperous-giovanni-spasmodic.ngrok-free.dev/widget.js"
             data-widget-id="WEpQjgDnXfJ_"
             data-mode="widget"
-            data-container="nudgett-form"
-            strategy="lazyOnload"
+            strategy="afterInteractive"
           />
         </div>
         <FinalCTA />
